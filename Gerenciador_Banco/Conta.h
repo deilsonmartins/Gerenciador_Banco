@@ -1,17 +1,22 @@
 #pragma once
+#include "Pessoa.h"
 
-class Conta
+class Conta : public Pessoa
 {
 	int numero;
+	char tipo;
 	float saldo;
+	
 
 public:
 
-	Conta(int numero, float saldo);
+	void criar_conta();
 
-	int getNumero();
+	int get_numero();
 
-	float getSaldo();
+	float get_saldo();
+
+	char get_tipo();
 
 	void depositar(float quantidade);
 

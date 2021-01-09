@@ -1,22 +1,31 @@
 #include "Conta.h"
 #include <iostream>
 
-Conta::Conta(int numero, float saldo)
-{
-	this->numero = numero;
-	this->saldo = saldo;
-}
 
-int Conta::getNumero()
+void Conta::criar_conta()
+{
+	std::cout << "\nInsira o numero da conta: " << std::endl;
+	std::cin >> this->numero;
+	std::cout << "\nInsira o tipo da conta: " << std::endl;
+	std::cin >> this->tipo;
+	std::cout << "\nInsira o saldo inicial: " << std::endl;
+	std::cin >> this->saldo;
+
+}
+int Conta::get_numero()
 {
 	return numero;
 }
 
-float Conta::getSaldo()
+float Conta::get_saldo()
 {
 	return saldo;
 }
 
+char Conta::get_tipo()
+{
+	return tipo;
+}
 void Conta::depositar(float quantidade)
 {
 	if (quantidade < 0)
