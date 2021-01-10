@@ -13,5 +13,7 @@ public:
 	std::string get_nome();
 
 	std::string get_CPF();
+
+	void modificar_dados();
 };
 

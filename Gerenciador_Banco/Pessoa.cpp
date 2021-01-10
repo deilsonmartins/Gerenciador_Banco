@@ -3,11 +3,10 @@
 
 void Pessoa::cadastrar_pessoa()
 {
-	std::cout << "\nInsira o nome completo da pessoa: " << std::endl;
+	std::cout << "\nInsira o nome completo da pessoa: ";
 	std::cin.ignore();
 	getline(std::cin, nome);
-	std::cout << "\nInsira o cpf pessoa: " << std::endl;
-	std::cin.ignore();
+	std::cout << "\nInsira o cpf pessoa: ";
 	getline(std::cin, cpf);
 }
 std::string Pessoa::get_nome()
@@ -18,4 +17,13 @@ std::string Pessoa::get_nome()
 std::string Pessoa::get_CPF()
 {
 	return cpf;
+}
+
+void Pessoa::modificar_dados()
+{
+	std::cout << "\nInsira o nome do proprietario: ";
+	std::cin >> nome;
+	std::cout << "\nInsira o cpf do proprietario: ";
+	std::cin >> cpf;
+
 }
