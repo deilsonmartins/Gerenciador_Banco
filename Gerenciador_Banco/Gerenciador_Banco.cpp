@@ -229,13 +229,13 @@ void modificar_conta(int numero_conta)
 		if (c.get_numero() == numero_conta)
 		{
 			c.visualizar_conta();
-			std::cout << "\nModificação da conta: " << std::endl;
+			std::cout << "\nModificacao da conta: " << std::endl;
 			c.modificar_conta();
 			c.modificar_dados();
 			int pos = (-1) * static_cast<int>(sizeof(Conta));
 			fs.seekp(pos, std::ios::cur);
 			fs.write(reinterpret_cast<char*> (&c), sizeof(Conta));
-			std::cout << "\n\nModificao salva com sucesso!";
+			std::cout << "\n\nModificacao salva com sucesso!";
 			flag = true;
 		}
 	}
