@@ -1,3 +1,6 @@
+//******************************************
+//	BIBLIOTECAS E CLASSES UTILIZADAS
+//******************************************
 #include <iostream>
 #include "Conta.h"
 #include "Pessoa.h"
@@ -5,6 +8,9 @@
 #include <stdlib.h>
 #include <iomanip>
 
+//******************************************
+//	DECLARAÇÃO DAS FUNÇÕES UTILIZADAS
+//******************************************
 void cadastrar_conta();
 
 void visualizar_balanco_conta(int numero_conta);
@@ -15,6 +21,11 @@ void excluir_conta(int numero_conta);
 
 void modificar_conta(int numero_conta);
 
+void sacar_depositar(int numero_conta, char opcao);
+
+//******************************************
+//	FUNÇÃO MAIN DO PROJETO
+//******************************************
 int main()
 {
 	char ch;
@@ -39,6 +50,16 @@ int main()
 		{
 		case '1':
 			cadastrar_conta();
+			break;
+		case '2':
+			std::cout << "\n\nInsira o numero da conta: ";
+			std::cin >> numero_conta;
+			sacar_depositar(numero_conta, 'd');
+			break;
+		case '3':
+			std::cout << "\n\nInsira o numero da conta: ";
+			std::cin >> numero_conta;
+			sacar_depositar(numero_conta, 's');
 			break;
 		case '4':
 			std::cout << "\n\nInsira o numero da conta: ";
@@ -68,6 +89,10 @@ int main()
 	
 }
 
+//******************************************
+//	FUNÇÃO PARA CADASTRAR CONTA
+//		E ESCREVER EM ARQUIVO
+//******************************************
 void cadastrar_conta()
 {
 	Conta c;
@@ -84,6 +109,9 @@ void cadastrar_conta()
 	std::cout << "\nConta cadastrada com sucesso" << std::endl;
 }
 
+//******************************************
+//	FUNÇÃO PARA VISUALIZAR UMA CONTA ÚNICA
+//******************************************
 void visualizar_balanco_conta(int numero_conta)
 {
 	Conta c;
@@ -113,6 +141,9 @@ void visualizar_balanco_conta(int numero_conta)
 		std::cout << "Nao existe conta com esse numero" << std::endl;
  }
 
+//******************************************
+//	FUNÇÃO PARA VISUALIZAR TODAS AS CONTAS
+//******************************************
 void visualizar_todas_contas()
 {
 	Conta c;
@@ -139,6 +170,9 @@ void visualizar_todas_contas()
 	ifs.close();
 }
 
+//******************************************
+//	FUNÇÃO PARA EXCLUIR UMA CONTA
+//******************************************
 void excluir_conta(int numero_conta)
 {
 	Conta c;
@@ -170,6 +204,9 @@ void excluir_conta(int numero_conta)
 	std::cout << "Conta deletada!" << std::endl;
 }
 
+//******************************************
+//	FUNÇÃO PARA MODIFICAR UMA CONTA
+//******************************************
 void modificar_conta(int numero_conta)
 {
 	Conta c;
@@ -200,6 +237,64 @@ void modificar_conta(int numero_conta)
 			fs.write(reinterpret_cast<char*> (&c), sizeof(Conta));
 			std::cout << "\n\nModificao salva com sucesso!";
 			flag = true;
+		}
+	}
+
+	fs.close();
+	if (flag == false)
+		std::cout << "Nao existe conta com esse numero" << std::endl;
+	
+}
+
+//******************************************
+//	FUNÇÃO PARA SACAR OU DEPOSITAR
+//		EM UMA CONTA ESPECÍFICA
+//******************************************
+void sacar_depositar(int numero_conta, char opcao)
+{
+	float quantidade;
+	bool flag = false;
+	
+	Conta c;
+	std::fstream fs;
+
+	fs.open("contas.dat", std::fstream::binary | std::fstream::in | std::fstream::out);
+
+	if (!fs)
+	{
+		std::cout << "\nErro ao abrir o arquivo...\n" << std::endl;
+		return;
+	}
+
+	while (!fs.eof() && flag == false)
+	{
+		fs.read(reinterpret_cast<char*> (&c), sizeof(Conta));
+		if (c.get_numero() == numero_conta)
+		{
+			if (opcao == 'd')
+			{
+				std::cout << "Quanto deseja depositar: ";
+				std::cin >> quantidade;
+				c.depositar(quantidade);
+				int pos = (-1) * static_cast<int>(sizeof(Conta));
+				fs.seekp(pos, std::ios::cur);
+				fs.write(reinterpret_cast<char*> (&c), sizeof(Conta));
+				std::cout << "\n\nDeposito feito com sucesso!";
+				flag = true;
+			}
+
+			else if (opcao == 's')
+			{
+				std::cout << "Quanto deseja sacar: ";
+				std::cin >> quantidade;
+				c.sacar(quantidade);
+				int pos = (-1) * static_cast<int>(sizeof(Conta));
+				fs.seekp(pos, std::ios::cur);
+				fs.write(reinterpret_cast<char*> (&c), sizeof(Conta));
+				std::cout << "\n\nSaque feito com sucesso!";
+				flag = true;
+			}
+				
 		}
 	}
 
