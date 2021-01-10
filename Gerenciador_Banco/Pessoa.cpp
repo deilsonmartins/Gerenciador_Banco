@@ -1,5 +1,14 @@
+//******************************************
+//	BIBLIOTECAS E CLASSES UTILIZADAS
+//******************************************
+
 #include "Pessoa.h"
 #include <iostream>
+
+//******************************************
+//	IMPLEMENTAÇÕES DOS MÉTODOS 
+//	DA CLASSE PESSOA
+//******************************************
 
 void Pessoa::cadastrar_pessoa()
 {
@@ -9,6 +18,7 @@ void Pessoa::cadastrar_pessoa()
 	std::cout << "\nInsira o cpf pessoa: ";
 	getline(std::cin, cpf);
 }
+
 std::string Pessoa::get_nome()
 {
 	return nome;

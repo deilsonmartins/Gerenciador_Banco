@@ -1,6 +1,15 @@
+//******************************************
+//	BIBLIOTECAS E CLASSES UTILIZADAS
+//******************************************
+
 #include "Conta.h"
 #include <iostream>
 #include <iomanip> 
+
+//******************************************
+//	IMPLEMENTAÇÕES DOS MÉTODOS 
+//	DA CLASSE CONTA
+//******************************************
 
 void Conta::criar_conta()
 {
