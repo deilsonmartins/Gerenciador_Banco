@@ -22,5 +22,11 @@ public:
 
 	void sacar(float quantidade);
 
+	void visualizar_conta();
+
+	void relatorio_conta();
+
+	void modificar_conta();
+
 };
 
